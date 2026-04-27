@@ -1,9 +1,10 @@
 # Repo guide
 
 speedboat is a small, gifted starter repo: a thesis on consolidating
-cross-border equity compensation at IBKR Ireland, plus the
-operational scripts and reference material to drive IBKR's Client
-Portal Gateway once an account exists. Two participants plus a
+cross-border equity compensation at IBKR (specifically the EU
+entity, IBKR Ireland, where IBKR routes a German-resident applicant
+automatically), plus the operational scripts and reference material
+to drive IBKR's Client Portal Gateway once an account exists. Two participants plus a
 coding agent: the Manager (giver of this repo), the Contributor
 (owner), and the Agent (AI assistant). No runtime that touches real
 money.

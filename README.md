@@ -3,9 +3,11 @@
 A small repo to help you get more out of your cross-border equity
 compensation. The thesis is in
 [ibkr_for_cross_border_equity_comp.md](ibkr_for_cross_border_equity_comp.md):
-consolidate the shares at IBKR Ireland, where you can hold multi-
-currency cash, convert FX cheaply, and pay euro out to your German
-bank without paying retail FX spreads.
+consolidate the shares at IBKR, where you can hold multi-currency
+cash, convert FX cheaply, and pay euro out to your German bank
+without paying retail FX spreads. (When you open an account as a
+German resident, IBKR routes you to its EU entity automatically —
+the seed doc has the regulatory picture.)
 
 speedboat itself is small. Today it's a thesis, the operational
 scripts to drive IBKR's Client Portal Gateway (the daemon you run
@@ -17,8 +19,8 @@ scaffolding is ready.
 
 ## What's here
 
-- A clear thesis on why IBKR Ireland is the right place to put the
-  shares, and how the share transfer actually works
+- A clear thesis on why IBKR is the right place to put the shares,
+  and how the share transfer actually works
   ([seed doc](ibkr_for_cross_border_equity_comp.md)).
 - Operational scripts and a screenshot-led walkthrough for IBKR's
   Client Portal Gateway, the one daemon you need to run for the API
@@ -27,8 +29,11 @@ scaffolding is ready.
   cleanly ([docs/ibkr/what-works.md](docs/ibkr/what-works.md)) and
   where it falls short
   ([docs/ibkr/what-doesnt.md](docs/ibkr/what-doesnt.md)).
-- A small corpus on coding-agent design, kept locally so the agent
-  can find it ([docs/agentic-design/](docs/agentic-design/)).
+- A reference corpus on agent and harness design — Anthropic and
+  OpenAI primary sources, plus an applied synthesis
+  ([docs/agentic-design/](docs/agentic-design/)). Useful for the
+  agent to draw on, and (if you're into harness engineering)
+  interesting prose in its own right.
 
 ## What an agent in this repo will find easy
 
@@ -62,8 +67,8 @@ Full list at [docs/ibkr/what-doesnt.md](docs/ibkr/what-doesnt.md).
 
 ## Getting started
 
-You'll need an IBKR Ireland account. The seed doc explains why and
-how to open one. Once it exists:
+You'll need an IBKR account. The seed doc explains why and how to
+open one. Once it exists:
 
 1. **Fetch the gateway** — `./scripts/download_gateway.sh`. This
    downloads IBKR's Client Portal Gateway, regenerates its TLS
@@ -88,8 +93,13 @@ how to open one. Once it exists:
    terminal with a quick status check and your account ID. The
    API is now reachable at `https://localhost:5000/v1/api/...`.
 
-6. **Talk to your coding agent about what to build first.** The
-   `docs/ibkr/` material is a starter library it can read.
+6. **Point your coding agent at the repo and ask it what to build
+   first.** It'll pick up `CLAUDE.md` and the `docs/` tree
+   automatically — the IBKR domain knowledge in `docs/ibkr/` is
+   its starter library, and `docs/agentic-design/` keeps the
+   relevant essays close at hand. Works with any harness that
+   reads `CLAUDE.md` (Claude Code, OpenCode, Cursor, etc.) — the
+   repo is harness-agnostic.
 
 The two desktop screens you'll see — login, then the prompt to
 look at your phone:
@@ -106,8 +116,11 @@ handles it for you.)
 
 ## Growing this repo
 
-Things you might want to add, in rough order of how much value they
-return per hour spent:
+Two flavors of next step. The brokerage-feature ones produce useful
+tooling; the agent-design ones are excuses to play with harness
+engineering against a real, concrete domain.
+
+### Brokerage features
 
 - A read-only dashboard. Streamlit is the easiest path; positions
   + today's P/L + an allocation treemap is a complete first step
@@ -122,6 +135,36 @@ return per hour spent:
 
 None of these need data beyond what IBKR gives free. None of them
 require touching real money — they're all read-and-compute.
+
+### Agent-design experiments
+
+If you're into harness engineering, the IBKR API is a reasonable
+playground — concrete, bounded, with cleanly mixed strengths and
+gaps (see [docs/ibkr/what-works.md](docs/ibkr/what-works.md) and
+[docs/ibkr/what-doesnt.md](docs/ibkr/what-doesnt.md)). A few things
+worth trying:
+
+- **Action-registry-driven IBKR client.** Build the client with an
+  explicit action registry — name, inputs, validation, risk level,
+  whether confirmation is required — instead of letting the agent
+  call HTTP endpoints directly. Then see how well the agent stays
+  on-contract without leaking endpoint detail into prompts. Pattern
+  from
+  [docs/agentic-design/borrowable-harness-patterns.md](docs/agentic-design/borrowable-harness-patterns.md).
+- **Decision-artifact log for FX conversions.** Every time the
+  agent suggests "convert now," persist the reasoning, the rate
+  observed, the alternatives considered. Compare across decisions
+  later. Same pattern, applied to a smaller surface.
+- **Multi-source orchestrator.** Build the meta-layer that knows
+  when to use IBKR (cheap, complete for "self" data) vs. when to
+  reach for a third-party feed like Massive (better for "world"
+  data — universe scans, fundamentals across thousands of names,
+  full options chains). Persistent memory of which questions
+  resolved cleanly via which source. This is the orchestrator
+  shape your existing harness probably already has primitives for.
+
+Each of these is small, reversible, and produces something you can
+look at later.
 
 ## Conventions
 

@@ -6,8 +6,8 @@ can pick up the problem cold without re-doing the research.
 
 ## Brokerage tools — read-only IBKR client and dashboard
 
-**Status:** deferred 2026-04-26. Revisit once an IBKR Ireland
-account exists to point a client at.
+**Status:** deferred 2026-04-26. Revisit once an IBKR account
+exists to point a client at.
 
 ### What this would be
 
@@ -41,14 +41,14 @@ The corpus to lean on already lives in this repo:
 ### Why deferred
 
 No account to point it at yet. The decision to consolidate at IBKR
-Ireland is the seed-doc thesis but has not been acted on. Building
-a client without an account would be cargo-cult engineering rather
-than solving a concrete problem.
+is the seed-doc thesis but has not been acted on. Building a client
+without an account would be cargo-cult engineering rather than
+solving a concrete problem.
 
 ### Decision point
 
 Build when:
-1. The IBKR Ireland account is open and funded; and
+1. The IBKR account is open and funded; and
 2. There's a specific question the dashboard would answer that the
    IBKR web portal answers poorly (concentration drift over time,
    FX timing, vest-event tracking).
