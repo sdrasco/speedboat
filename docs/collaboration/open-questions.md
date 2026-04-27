@@ -1,16 +1,16 @@
 # Open questions
 
-Questions waiting on input from one contributor or the other, with
-date asked. The point of this file is so neither of us has to
-scroll back through chat to remember what's pending — answers can
-be edited in place.
+Questions waiting on input from one participant or another, with
+date asked. The point of this file is so no one has to scroll back
+through chat to remember what's pending — answers can be edited in
+place.
 
 Format per entry:
 
 ```
 ## YYYY-MM-DD — short title
 
-**Asked of:** Friend / Steve
+**Asked of:** Manager / Contributor / Agent
 
 **Question(s):**
 1. ...
@@ -27,7 +27,7 @@ Most recent entries on top.
 
 ## 2026-04-26 — orchestrator scope and shape
 
-**Asked of:** Friend
+**Asked of:** Contributor
 
 **Questions:**
 
@@ -43,12 +43,12 @@ Most recent entries on top.
    CrewAI, or just lean harder on Claude Code's built-in memory)?
    Big difference in cost and reversibility.
 
-**Context:** the friend's first design pointer (logged in
+**Context:** the Contributor's first design pointer (logged in
 [inputs.md](inputs.md) under 2026-04-26) was *"an orchestrator for
-the chat sessions, with persistent memory across them."* Steve
-agreed in principle and deferred to first build the nekomata-style
-scaffolding, with the intent to reconcile her input on top once
-these clarifying questions land. The deferred project is in
-[../future-projects.md](../future-projects.md).
+the chat sessions, with persistent memory across them."* The
+Manager agreed in principle and deferred to first build the
+nekomata-style scaffolding, with the intent to reconcile that input
+on top once these clarifying questions land. The deferred project
+is in [../future-projects.md](../future-projects.md).
 
 **Answer:** [pending]

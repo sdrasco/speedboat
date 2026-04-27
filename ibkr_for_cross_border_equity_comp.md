@@ -2,7 +2,7 @@
 
 ## The original situation
 
-A friend, Spanish citizen and German tax resident, works for a US tech company. Part of her compensation arrives as shares delivered to a US-based Morgan Stanley account. She is reluctant to move or trade the shares because of the friction involved: creating a Wise account, paying foreign exchange (FX) conversion costs, and moving either the shares or their US dollar (USD) value into her European Union (EU) bank accounts.
+The Contributor, Spanish citizen and German tax resident, works for a US tech company. Part of her compensation arrives as shares delivered to a US-based Morgan Stanley account. She is reluctant to move or trade the shares because of the friction involved: creating a Wise account, paying foreign exchange (FX) conversion costs, and moving either the shares or their US dollar (USD) value into her European Union (EU) bank accounts.
 
 ## Would an Interactive Brokers (IBKR) cash account make her life easier?
 

@@ -11,9 +11,9 @@ them, and what tooling is worth building around that decision.
 Today, docs only. The repo collects:
 
 - A seed thesis on cross-border equity compensation at IBKR Ireland
-  (the motivating case is the friend's situation: Spanish citizen,
-  German tax resident, US tech employee with shares at Morgan
-  Stanley).
+  (the motivating case is the Contributor's situation: Spanish
+  citizen, German tax resident, US tech employee with shares at
+  Morgan Stanley).
 - A reference corpus on agent and harness design (Anthropic, OpenAI,
   plus an internal synthesis), kept locally so the thinking is
   reachable offline.
@@ -55,16 +55,18 @@ for the shape they're likely to take.
 
 ## Conventions
 
-The doc set is written in neutral / "we" voice on the assumption that
-both contributors will read everything. Real names are kept out of
-the repo: the seed doc and all canonical docs use `the friend` as
-the pseudonym. See [docs/conventions.md](docs/conventions.md) for
-the full set.
+The doc set is written in neutral / "we" voice on the assumption
+that both contributors will read everything. Real names are kept
+out of the repo: canonical docs use the role names `Manager` (lead),
+`Contributor` (collaborator), and `Agent` (AI assistant) instead of
+personal identifiers. See [docs/conventions.md](docs/conventions.md)
+for the full set.
 
 ## Push workflow
 
 Three remotes — M4 (primary, local Mac), M1a (backup, second Mac),
 github (private cloud backup). Always push M4 first. Always ask
-before pushing. If a second committer joins, github takes over as
-the collaboration surface and this workflow needs revisiting; the
-deferred decision is captured in [docs/future-projects.md](docs/future-projects.md).
+before pushing. If the Contributor joins as a second committer,
+github takes over as the collaboration surface and this workflow
+needs revisiting; the deferred decision is captured in
+[docs/future-projects.md](docs/future-projects.md).

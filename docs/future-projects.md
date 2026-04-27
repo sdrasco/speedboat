@@ -96,23 +96,24 @@ belong in a future separate execution-system repo, not here.
 Build when:
 1. The doc set has stabilised enough that a static site adds value
    over browsing the repo directly; and
-2. There's a concrete event (the friend asking for a link, or a
-   stretch where the docs would otherwise be shared via screenshots).
+2. There's a concrete event (the Contributor asking for a link, or
+   a stretch where the docs would otherwise be shared via
+   screenshots).
 
 ## Orchestrator + persistent memory across chat sessions
 
-**Status:** deferred 2026-04-26. Origin: the friend's first design
-pointer (see
+**Status:** deferred 2026-04-26. Origin: the Contributor's first
+design pointer (see
 [docs/collaboration/inputs.md](collaboration/inputs.md)). Revisit
 once at least one runtime surface exists for the orchestrator to
 coordinate.
 
 ### The pointer
 
-The friend suggested *"an orchestrator for the chat sessions, with
-persistent memory across them."* Steve agreed in principle but
-deferred to first build the nekomata-style scaffolding, then
-reconcile her input on top.
+The Contributor suggested *"an orchestrator for the chat sessions,
+with persistent memory across them."* The Manager agreed in
+principle but deferred to first build the nekomata-style
+scaffolding, then reconcile the Contributor's input on top.
 
 This points at a meta-layer: how the project itself gets developed
 and reasoned about, rather than a brokerage-tool feature. It maps
@@ -149,24 +150,26 @@ persist.
 Pick this back up when one of:
 - The first runtime surface (any of the three above) has been
   built and is being used in two or more parallel chat sessions.
-- The friend's clarifying answers come back and reshape the scope.
+- The Contributor's clarifying answers come back and reshape the
+  scope.
 - The conversation log in `inputs.md` gets thick enough that
   ad-hoc memory in `MEMORY.md` is visibly losing context across
   sessions.
 
 ## Push workflow with a second committer
 
-**Status:** deferred until the friend makes her first commit.
+**Status:** deferred until the Contributor's first commit lands.
 Captured in [docs/conventions.md](conventions.md) under the push
 workflow section as a flag.
 
 ### What changes when there's a second committer
 
 The current three-remote workflow (M4 → M1a → github, M4 first)
-treats github as cold backup. If the friend commits, github has to
-become the collaboration surface (PRs, branches, review), at which
-point the M4-first ordering stops being meaningful — her commits
-arrive *from* github, not via a Mac she doesn't have access to.
+treats github as cold backup. If the Contributor commits, github
+has to become the collaboration surface (PRs, branches, review),
+at which point the M4-first ordering stops being meaningful — those
+commits arrive *from* github, not via a Mac the Contributor doesn't
+have access to.
 
 ### Likely shape of the change
 
@@ -180,4 +183,4 @@ arrive *from* github, not via a Mac she doesn't have access to.
   rule becomes "always rebase or merge, then ask."
 
 Don't pre-build any of this. Decide based on what's actually
-inconvenient when she starts committing.
+inconvenient when the Contributor starts committing.

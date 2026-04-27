@@ -3,9 +3,10 @@
 speedboat explores where to store financial assets distributed as part
 of a compensation package. Today it's a docs-only repo: a seed thesis,
 an imported corpus on agent design, and an imported corpus of IBKR
-institutional knowledge. Two contributors: Steve and the friend whose
-situation the seed doc describes. No runtime, no code that touches
-real money.
+institutional knowledge. Two contributors plus a coding agent: the
+Manager (lead), the Contributor (collaborator, whose situation the
+seed doc describes), and the Agent (AI assistant). No runtime, no
+code that touches real money.
 
 ## Where to look
 
