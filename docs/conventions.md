@@ -1,7 +1,7 @@
 # Conventions
 
-Non-obvious rules and stylistic norms for this repo. Keep this short;
-prefer one sentence per item.
+Non-obvious rules and stylistic norms for this repo. Keep this
+short; prefer one sentence per item.
 
 ## Hard constraints
 
@@ -13,28 +13,28 @@ one will be:
   and when a runtime is added that touches IBKR, it must not place,
   modify, cancel, or stage orders. The full version of this rule
   (including the specific endpoints to refuse) is in
-  [docs/ibkr/conventions.md](ibkr/conventions.md), inherited from
-  sibling repo `nekomata`. Any execution-capable code belongs in a
-  separate, narrowly-scoped repo, not here.
+  [docs/ibkr/conventions.md](ibkr/conventions.md). Any
+  execution-capable code belongs in a separate, narrowly-scoped
+  repo, not here.
 
 ## Doc voice and roles
 
-- The repo is a shared space. Write all canonical docs in neutral /
-  "we" voice, not "I" voice. The collaboration log
+- The repo is for both human and Agent eyes. Write all canonical
+  docs in neutral / "we" voice, not "I" voice. The collaboration log
   ([docs/collaboration/inputs.md](collaboration/inputs.md)) is the
   exception — it preserves first-person attributions per role.
 - **Real names are kept out of the repo.** Canonical docs use three
   role names instead of personal identifiers:
-  - **Manager** — the project lead.
-  - **Contributor** — the collaborator (whose situation the seed doc
-    describes).
+  - **Manager** — the giver of this repo.
+  - **Contributor** — the owner of this repo (whose situation the
+    seed doc describes).
   - **Agent** — the AI coding assistant.
 - **`Contributor` (capitalized) is always the role.** Lowercase
   `contributor(s)` is generic English. `client`, `agent` lowercased
-  in the IBKR / API material refer to software clients (HTTP
-  clients, the IBKR Client Portal Gateway as a product name) and
-  user-agents — unrelated to the role names. The capitalization is
-  the disambiguation rule; respect it.
+  in the IBKR material refer to software clients (HTTP clients, the
+  IBKR Client Portal Gateway as a product name) and user-agents —
+  unrelated to the role names. The capitalization is the
+  disambiguation rule; respect it.
 - If a participant wants to be named explicitly, they can edit;
   until then, role names win.
 
@@ -43,31 +43,24 @@ one will be:
 - **Define acronyms on first use** — full phrase followed by the
   acronym in parentheses, inline. The seed doc already follows this.
 - **Em-dashes are fine.** They show up freely in the seed doc and
-  in sibling repo `nekomata`, and the imported agent-design corpus
-  uses them too. Staying consistent with that local norm rather
-  than importing the JobSearch ban.
+  the imported agent-design corpus uses them too. Stay consistent
+  with that local norm.
 - Markdown reference style: GitHub-flavored. File and path links use
   relative paths so the repo browses correctly on disk and on
-  github.
+  GitHub.
 
-## Push workflow
+## Notes-as-docs
 
-Three remotes, M4 is primary:
+This repo is meant to grow as a working knowledge garden. When you
+have a quick thought or pointer that doesn't fit neatly into an
+existing doc, prefer **a new short focused file under `docs/`**
+over appending to an already-busy file. A one-screen file with a
+clear title is much easier to find and read later than a paragraph
+buried in a long doc. Link new files from
+[CLAUDE.md](../CLAUDE.md) so the index stays usable.
 
-| Remote | Role |
-|--------|------|
-| M4     | primary (local Mac) |
-| M1a    | backup (second Mac) |
-| github | cloud backup (private) |
+## Git
 
-**Always push M4 first.** Then M1a and github. **Always ask before
-pushing.** Shortcut: `git pushall` (global alias — pushes all three
-in order).
-
-**Deferred decision.** This workflow assumes a single committer with
-the M4 mac as ground truth. If the Contributor joins as a second
-committer, github becomes the collaboration surface (PRs, branches,
-review) and the M4-first ordering stops making sense. The full
-reasoning and the likely shape of the change live in
-[docs/future-projects.md](future-projects.md) — pick it up when the
-Contributor makes a commit.
+This repo uses a single remote, set up by whoever owns it. Normal
+`git push` and `git pull` against that one remote. Always commit
+before pushing.

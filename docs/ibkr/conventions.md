@@ -1,21 +1,20 @@
 ---
 name: IBKR Web API conventions and gotchas
-description: Non-obvious rules and gotchas for the IBKR Client Portal Web API, distilled from sibling repo `nekomata`'s production experience.
+description: Non-obvious rules and gotchas for the IBKR Client Portal Web API, distilled from prior production experience.
 type: reference
 ---
 
 # IBKR Web API conventions and gotchas
 
-Non-obvious rules and gotchas that aren't derivable from IBKR's docs.
-Distilled from production experience in sibling repo `nekomata` (a
-read-only IBKR dashboard against a real, funded retail account). Each
-item is something that cost real debugging time to discover. Keep this
-short; prefer one sentence per item.
+Non-obvious rules and gotchas that aren't derivable from IBKR's
+docs. Distilled from prior production experience against this API.
+Each item is something that cost real debugging time to discover.
+Keep this short; prefer one sentence per item.
 
-NinaPinta does not yet have a runtime that touches IBKR. When it does,
-file references like *"normalize at the boundary"* below should be
-read as design guidance — not as pointers to existing functions in
-this repo.
+This repo doesn't yet have a runtime that touches IBKR. When it
+does, file references like *"normalize at the boundary"* below
+should be read as design guidance — not as pointers to existing
+functions in this repo.
 
 ## Hard constraints (when this repo gains code that touches IBKR)
 
@@ -153,10 +152,9 @@ If the dashboard shows non-USD cash:
 
 ## See also
 
-- [activity-statements.md](activity-statements.md) — full treatment of
-  why historical trade data has to come from the manual CSV download.
+- [activity-statements.md](activity-statements.md) — full treatment
+  of why historical trade data has to come from the manual CSV
+  download.
 - [cert-regen.md](cert-regen.md) — TLS cert regeneration recipe.
-- The `ibkr-cpapi` skill (in the user's skill set, written from
-  empirical probing of a separate `trades` repo on 2026-04-20) is a
-  parallel source of API-shape knowledge; cross-check against this
-  file before writing non-trivial code.
+- [what-works.md](what-works.md) and [what-doesnt.md](what-doesnt.md)
+  — capabilities vs limits, summarized at a higher level.

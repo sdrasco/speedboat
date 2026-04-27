@@ -15,8 +15,8 @@ the IBKR web portal — the same backend, serialized completely.
 
 ## Why the API endpoints fall short
 
-Empirically verified 2026-04-23 against a real retail account
-(via sibling repo `nekomata`):
+Empirically verified 2026-04-23 against a retail account in prior
+production work:
 
 ### `/iserver/account/trades?days=N`
 
@@ -96,9 +96,9 @@ because the CP Web API has no transfer endpoint for retail accounts —
 
 ### Gap detection on import
 
-The pattern `nekomata` settled on, worth carrying forward: when a new
-statement is imported, run a strict gap check against the current
-merged artifacts. If the new statement's start date is more than one
+The pattern that's worked best in prior work, worth carrying
+forward: when a new statement is imported, run a strict gap check
+against the current merged artifacts. If the new statement's start date is more than one
 day after the latest date already on record (across both `trades.csv`
 and `transfers.csv`), hold the import with a warning naming the
 existing max date and the gap length. Provide an "import anyway"
@@ -173,6 +173,5 @@ in the web portal (**Performance & Reports** → **Flex Queries**),
 get a token, then POST to
 `https://ndcdyn.interactivebrokers.com/.../FlexStatementService.svc`.
 
-Out of scope while NinaPinta is read-only and pre-runtime, but the
-correct next step if historical-trade analysis becomes a recurring
-workflow.
+Out of scope while this repo is pre-runtime, but the correct next
+step if historical-trade analysis becomes a recurring workflow.

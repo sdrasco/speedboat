@@ -1,6 +1,6 @@
 ---
 name: agentic-design corpus
-description: Local copies of external essays on agent and harness design, plus a synthesis written for sibling repos.
+description: Local copies of external essays on agent and harness design, plus an internal synthesis.
 type: reference
 ---
 
@@ -21,7 +21,7 @@ first pass; the synthesis at the end is the most directly applicable.
 | [anthropic-building-effective-agents.md](anthropic-building-effective-agents.md) | https://www.anthropic.com/engineering/building-effective-agents (Schluntz & Zhang, 2024-12-19) | Workflows vs. agents, augmented-LLM building blocks, when to add complexity vs. when to stop. |
 | [openai-practical-guide-to-building-agents.md](openai-practical-guide-to-building-agents.md) | https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/ (OpenAI, 2025) | Agent shape, when an agent is the right tool at all, model/tool/instruction selection. |
 | [openai-harness-engineering.md](openai-harness-engineering.md) | https://openai.com/index/harness-engineering/ (Lopopolo, 2026-02-11) | The harness layer around the model: tool design, observability, eval discipline. PDF original lives alongside as `Harness engineering...pdf`. |
-| [borrowable-harness-patterns.md](borrowable-harness-patterns.md) | Internal synthesis (originally written for sibling repo `unmpld`). | Six concrete patterns worth porting from harness work into a small, single-author project, plus a "what not to cargo-cult" section. |
+| [borrowable-harness-patterns.md](borrowable-harness-patterns.md) | Internal synthesis. | Six concrete patterns worth porting from harness work into a small, focused project, plus a "what not to cargo-cult" section. |
 
 ## How to use this
 
@@ -38,6 +38,5 @@ These are static snapshots. The originals will drift. Re-fetch and
 diff before relying on any specific claim for non-trivial work — bump
 the date below when you do.
 
-**Last fetched:** 2026-04-26 (copied from sibling repo `unmpld`, which
-fetched the originals over the period 2026-04-01 to 2026-04-09 and
-2026-02-11 for the harness PDF).
+**Last fetched:** the originals were captured over April 2026; the
+harness PDF is dated 2026-02-11.

@@ -1,21 +1,19 @@
 ---
 name: Borrowable harness patterns
-description: Synthesis of harness-design patterns worth porting into a small, single-author project. Originally written for sibling repo `unmpld`.
+description: Synthesis of harness-design patterns worth porting into a small, focused project.
 type: reference
 ---
 
 # Borrowable harness patterns
 
-**Origin:** This document was originally written for the sibling
-project `unmpld` (an AI-powered job-search agent), distilling lessons
-from a review of the OpenAI/Codex harness work and the broader
-agent-engineering corpus stored alongside this file. It is preserved
-here for NinaPinta because the patterns generalize cleanly — they were
-captured for a small, single-author project with a focused runtime,
-which is the same shape NinaPinta is likely to grow into. References
-to `unmpld` files (`server.js`, `routes/chat.js`, etc.) are kept where
-they're useful as concrete worked examples; nothing in NinaPinta uses
-those names.
+**Origin:** This document is a synthesis of patterns worth borrowing
+from another small AI-agent project, distilling lessons from a
+review of the OpenAI/Codex harness work and the broader
+agent-engineering corpus stored alongside this file. The patterns
+generalize cleanly to any small project with a focused runtime,
+which is the shape this repo is likely to grow into. The original
+worked examples have been kept where they make a pattern concrete,
+generalized away from any specific file names.
 
 ---
 
@@ -49,13 +47,12 @@ But a small corpus that explains:
 - what the agent can and cannot do
 - where extension work should happen
 
-In `unmpld`, the high-value surfaces were `server.js` (entrypoint and
-route wiring), `routes/chat.js` (the chat/action loop), `agent.js`
-(ingestion/scoring), `crawl.js` (source acquisition), `db.js` (data
-model), `test/` (verification boundary). For NinaPinta, the analogous
-surfaces will surface as the project grows — likely a brokerage-API
-client, a small dashboard, and whatever decision-support layer sits on
-top.
+In the source project, the high-value surfaces were the entry point
+and route wiring, the main chat/action loop, the ingestion and
+scoring logic, the data acquisition layer, the data model, and the
+test boundary. For this repo, the analogous surfaces will appear as
+the project grows — likely a brokerage-API client, a small
+dashboard, and whatever decision-support layer sits on top.
 
 The goal is simple: when a human or coding agent opens the repo, they
 should not need to reconstruct the architecture from scratch.
@@ -90,11 +87,11 @@ That registry can then drive:
 - admin/debug tooling
 - future UI affordances
 
-This is less about abstraction for its own sake and more about keeping
-the bot's contract in one place. For NinaPinta this matters
-specifically for any future broker-facing tool: "place a limit order"
-is exactly the kind of action where a single canonical definition is
-worth its weight.
+This is less about abstraction for its own sake and more about
+keeping the bot's contract in one place. For this repo it matters
+specifically for any future broker-facing tool: "place a limit
+order" is exactly the kind of action where a single canonical
+definition is worth its weight.
 
 ## 3. Session and decision artifacts
 
@@ -160,19 +157,19 @@ human-in-the-loop confirmation step that no test can bypass.
 
 Docs should say clearly what the system is *not*.
 
-This sounds obvious, but it is easy to under-document limits and then
-accidentally build around false assumptions. Examples from `unmpld`'s
-charter that illustrate the pattern:
+This sounds obvious, but it is easy to under-document limits and
+then accidentally build around false assumptions. Examples from a
+small AI-agent charter that illustrate the pattern:
 
 - chat does not browse the web
-- company-board tracking is the primary acquisition path
+- a single canonical data-acquisition path is the primary source
 - arithmetic and counting should be deterministic, not delegated to
   the model
 - high-impact bulk actions need confirmation
-- profile updates are opportunistic and quiet, not a second visible
-  conversation
+- background profile updates are opportunistic and quiet, not a
+  second visible conversation
 
-The NinaPinta-shaped equivalents will look different (e.g. *"this repo
+For this repo, the equivalents will look different (e.g. *"this repo
 does not place orders,"* *"the agent does not give tax advice,"*
 *"FX-rate watching is read-only and notifies, never auto-converts"*),
 but the principle is the same.

@@ -1,72 +1,123 @@
 # speedboat
 
-A shared working repo for thinking through where to store financial
-assets distributed as part of a compensation package. Specifically:
-when shares arrive in a US brokerage account, but the recipient lives
-and pays tax in another jurisdiction, what's the right place to hold
-them, and what tooling is worth building around that decision.
+A small repo to help you get more out of your cross-border equity
+compensation. The thesis is in
+[ibkr_for_cross_border_equity_comp.md](ibkr_for_cross_border_equity_comp.md):
+consolidate the shares at IBKR Ireland, where you can hold multi-
+currency cash, convert FX cheaply, and pay euro out to your German
+bank without paying retail FX spreads.
 
-## What this is
+speedboat itself is small. Today it's a thesis, the operational
+scripts to drive IBKR's Client Portal Gateway (the daemon you run
+locally so the IBKR API is reachable from a Python script or a
+coding agent), and a reference library on what the IBKR API does
+well and where it falls short. There is no code here that touches
+real money. There's no IBKR account yet either — when there is, the
+scaffolding is ready.
 
-Today, docs only. The repo collects:
+## What's here
 
-- A seed thesis on cross-border equity compensation at IBKR Ireland
-  (the motivating case is the Contributor's situation: Spanish
-  citizen, German tax resident, US tech employee with shares at
-  Morgan Stanley).
-- A reference corpus on agent and harness design (Anthropic, OpenAI,
-  plus an internal synthesis), kept locally so the thinking is
-  reachable offline.
-- A reference corpus on the IBKR Client Portal Web API, including
-  snapshots of IBKR's public docs and the hard-won gotchas from
-  sibling repo `nekomata` (a working read-only IBKR dashboard).
+- A clear thesis on why IBKR Ireland is the right place to put the
+  shares, and how the share transfer actually works
+  ([seed doc](ibkr_for_cross_border_equity_comp.md)).
+- Operational scripts and a screenshot-led walkthrough for IBKR's
+  Client Portal Gateway, the one daemon you need to run for the API
+  to work ([scripts/](scripts/), [docs/ibkr/spinup.md](docs/ibkr/spinup.md)).
+- Background reading on the IBKR API itself — what it can do
+  cleanly ([docs/ibkr/what-works.md](docs/ibkr/what-works.md)) and
+  where it falls short
+  ([docs/ibkr/what-doesnt.md](docs/ibkr/what-doesnt.md)).
+- A small corpus on coding-agent design, kept locally so the agent
+  can find it ([docs/agentic-design/](docs/agentic-design/)).
 
-No runtime, no code that touches real money, no brokerage client.
-Those are deferred — see [docs/future-projects.md](docs/future-projects.md)
-for the shape they're likely to take.
+## What an agent in this repo will find easy
 
-## Status
+- Read account positions, balances, today's P/L.
+- Pull cash balances by currency, with USD-equivalents.
+- Get free real-time market data for US-listed equities and ETFs
+  (via the Cboe One + IEX feed that IBKR includes by default).
+- Query free FX rates.
+- Compute things from positions: allocation breakdowns,
+  concentration, unrealized P/L by sector.
+- Resolve tickers to IBKR's contract IDs (`conid`).
 
-- **Today (2026-04-26):** initial scaffolding. Seed doc plus imported
-  corpora plus the conventions to keep things shareable as the
-  project grows.
-- **Soon:** a documentation channel that's directly shareable —
-  probably a small VM-hosted site so updates land in one place
-  rather than fragmenting across email or text.
-- **Plausibly:** a small read-only IBKR client + dashboard adapted
-  from `nekomata`, once there's an account to point it at. Possibly
-  later, an orchestrator layer for the chat sessions used to develop
-  and reason about the project — see
-  [docs/collaboration/inputs.md](docs/collaboration/inputs.md).
+Full list at [docs/ibkr/what-works.md](docs/ibkr/what-works.md).
 
-## Repo layout
+## What it'll find harder
 
-| Path | Purpose |
-|------|---------|
-| [CLAUDE.md](CLAUDE.md) | Thin table-of-contents for coding agents working in this repo |
-| [ibkr_for_cross_border_equity_comp.md](ibkr_for_cross_border_equity_comp.md) | The seed thesis (cross-border equity comp, IBKR Ireland, project catalog) |
-| [docs/conventions.md](docs/conventions.md) | Repo conventions, doc voice, push workflow |
-| [docs/lingo.md](docs/lingo.md) | Shorthand used in chat with coding agents |
-| [docs/future-projects.md](docs/future-projects.md) | Deferred ideas with scoping context |
-| [docs/collaboration/](docs/collaboration/) | Symmetric design-exchange log + open questions |
-| [docs/agentic-design/](docs/agentic-design/) | Local essays on agent and harness design |
-| [docs/ibkr/](docs/ibkr/) | IBKR Web API doc snapshots + institutional knowledge |
-| [.claude/skills/](.claude/skills/) | Skill files for coding agents (currently: exe.dev usage) |
+- **Historical trades older than ~5–7 days.** The API basically
+  doesn't return them. The workaround (manual Activity Statement
+  CSV download) is documented, but is genuinely a manual step.
+- **Universe scans, fundamentals across thousands of names, full
+  options chains.** Doable but pacing-limited; better via a
+  third-party data provider like Massive.
+- **Anything requiring orders.** This repo is read-only by design.
+  Order placement belongs in a separate, isolated repo if it ever
+  happens.
+- **Anything that needs to run unattended overnight.** The gateway
+  needs a human to approve a phone push every ~24 h. Structural,
+  not a config issue.
+
+Full list at [docs/ibkr/what-doesnt.md](docs/ibkr/what-doesnt.md).
+
+## Getting started
+
+You'll need an IBKR Ireland account. The seed doc explains why and
+how to open one. Once it exists:
+
+1. **Fetch the gateway** — `./scripts/download_gateway.sh`. This
+   downloads IBKR's Client Portal Gateway, regenerates its TLS
+   certificate (the default ships with a hostname mismatch and
+   expired in 2019), and trusts the new cert in your macOS login
+   keychain so Chrome stops complaining.
+
+2. **Bring it up** — `./scripts/spinup.sh`. Starts the gateway and
+   opens the login page in Chrome.
+   ![Gateway login page](assets/screenshots/gateway-login.png)
+
+3. **Approve the push on your phone.** The IBKR Mobile app shows a
+   prompt; tap "approve."
+   ![IBKR Mobile push prompt](assets/screenshots/gateway-2fa-prompt.png)
+
+4. **You're authenticated.** The gateway is now serving the IBKR
+   API at `https://localhost:5000`. `spinup.sh` confirms with a
+   quick status check.
+   ![Authenticated gateway status](assets/screenshots/gateway-authenticated.png)
+
+5. **Talk to your coding agent about what to build first.** The
+   `docs/ibkr/` material is a starter library it can read.
+
+When you're done, run `./scripts/teardown.sh` to log out cleanly.
+(Skipping this step is fine but will make the next login a
+challenge dialog rather than a clean push approval. The script
+handles it for you.)
+
+## Growing this repo
+
+Things you might want to add, in rough order of how much value they
+return per hour spent:
+
+- A read-only dashboard. Streamlit is the easiest path; positions
+  + today's P/L + an allocation treemap is a complete first step
+  and the agent has the IBKR knowledge to build it from scratch.
+- Vest-event tracking — when shares from the Morgan Stanley side
+  unlock and arrive at IBKR after a transfer.
+- A USD→EUR FX-conversion helper that watches the rate and pings
+  you when it hits a target you've set.
+- Tax-lot accounting for German FIFO reporting. Sourced from the
+  Activity Statement CSV (see
+  [docs/ibkr/activity-statements.md](docs/ibkr/activity-statements.md)).
+
+None of these need data beyond what IBKR gives free. None of them
+require touching real money — they're all read-and-compute.
 
 ## Conventions
 
-The doc set is written in neutral / "we" voice on the assumption
-that both contributors will read everything. Real names are kept
-out of the repo: canonical docs use the role names `Manager` (lead),
-`Contributor` (collaborator), and `Agent` (AI assistant) instead of
-personal identifiers. See [docs/conventions.md](docs/conventions.md)
-for the full set.
+The doc set is written for both human eyes and the coding agent
+that will work alongside you. See
+[docs/conventions.md](docs/conventions.md) for the full set —
+short, just the things that aren't obvious from the code.
 
-## Push workflow
+## License & ownership
 
-Three remotes — M4 (primary, local Mac), M1a (backup, second Mac),
-github (private cloud backup). Always push M4 first. Always ask
-before pushing. If the Contributor joins as a second committer,
-github takes over as the collaboration surface and this workflow
-needs revisiting; the deferred decision is captured in
-[docs/future-projects.md](docs/future-projects.md).
+Yours. Do whatever you want with it.

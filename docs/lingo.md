@@ -1,29 +1,30 @@
 # Lingo
 
-Recurring shorthand the contributors use in conversation with a
-coding agent. Written for any LLM working in this repo — look here
-before asking what a short directive means. Living document; add
-entries as new shorthand shows up.
+Recurring shorthand used in conversation with a coding agent. Look
+here before asking what a short directive means. Living document;
+add entries as new shorthand shows up.
 
 ## do a push / push this
 
-**Meaning:** follow the three-remote workflow documented in
-[conventions.md](conventions.md#push-workflow). Cross-repo convention
-— the same three remotes (M4, M1a, github) apply in `nekomata`,
-`unmpld`, and `flatbot` too.
-
-Key rule: **push M4 first**, then M1a and github as reachable.
-Always confirm with the user before pushing — show which remotes
-you intend to hit. `git pushall` is the global alias that does all
-three in order.
+**Meaning:** commit any pending changes and `git push` to the repo's
+single remote. Always confirm before pushing if any change touches
+sensitive areas (memory files, credentials, anything outside the
+working tree). See the **Git** section in
+[conventions.md](conventions.md#git).
 
 ## spinup
 
-**Meaning:** placeholder. In sibling repo `nekomata`, `spinup` runs
-`scripts/spinup.sh` to bring the IBKR Client Portal Gateway and
-Streamlit dashboard up. speedboat has no equivalent yet — when a
-local runtime is added, give it a `scripts/spinup.sh` and update
-this entry.
+**Meaning:** run `scripts/spinup.sh`. Brings the IBKR Client Portal
+Gateway up: starts the daemon if it's down, opens the login page in
+Chrome, waits for IBKR Mobile push approval, then prints a
+confirmation. Idempotent. Walkthrough with screenshots in
+[docs/ibkr/spinup.md](ibkr/spinup.md).
+
+## spindown / teardown
+
+**Meaning:** run `scripts/teardown.sh`. Sends a graceful logout to
+IBKR (so the next login is a clean push approval rather than a
+challenge dialog) and stops the gateway daemon.
 
 ## Future additions
 

@@ -46,9 +46,9 @@ Most recent entries on top.
 **Context:** the Contributor's first design pointer (logged in
 [inputs.md](inputs.md) under 2026-04-26) was *"an orchestrator for
 the chat sessions, with persistent memory across them."* The
-Manager agreed in principle and deferred to first build the
-nekomata-style scaffolding, with the intent to reconcile that input
-on top once these clarifying questions land. The deferred project
-is in [../future-projects.md](../future-projects.md).
+Manager agreed in principle and deferred to first erect the
+scaffolding pattern this repo uses, with the intent to reconcile
+that input on top once these clarifying questions land. The
+deferred project is in [../future-projects.md](../future-projects.md).
 
 **Answer:** [pending]
