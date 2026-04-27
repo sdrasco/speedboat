@@ -72,20 +72,32 @@ how to open one. Once it exists:
    keychain so Chrome stops complaining.
 
 2. **Bring it up** — `./scripts/spinup.sh`. Starts the gateway and
-   opens the login page in Chrome.
-   ![Gateway login page](assets/screenshots/gateway-login.png)
+   opens the IBKR login page in Chrome. Type your username and
+   password.
 
-3. **Approve the push on your phone.** The IBKR Mobile app shows a
-   prompt; tap "approve."
-   ![IBKR Mobile push prompt](assets/screenshots/gateway-2fa-prompt.png)
+3. **The desktop tells you to look at your phone.** After you
+   submit, the page transitions to a "look at your phone" prompt
+   while it waits for the push approval.
 
-4. **You're authenticated.** The gateway is now serving the IBKR
-   API at `https://localhost:5000`. `spinup.sh` confirms with a
-   quick status check.
-   ![Authenticated gateway status](assets/screenshots/gateway-authenticated.png)
+4. **Approve the push on your phone.** Standard two-factor
+   confirmation in IBKR's IB Key app — Face ID, Touch ID, or
+   whatever phone unlock you have set up.
 
-5. **Talk to your coding agent about what to build first.** The
+5. **You're authenticated.** The desktop transitions to the IBKR
+   Client Portal landing page, and `spinup.sh` confirms in the
+   terminal with a quick status check and your account ID. The
+   API is now reachable at `https://localhost:5000/v1/api/...`.
+
+6. **Talk to your coding agent about what to build first.** The
    `docs/ibkr/` material is a starter library it can read.
+
+The two desktop screens you'll see — login, then the prompt to
+look at your phone:
+
+<p>
+  <img src="assets/screenshots/gateway-login.png" alt="Step 2: IBKR login page" width="280">
+  <img src="assets/screenshots/gateway-2fa-waiting.png" alt="Step 3: Look at your phone" width="280">
+</p>
 
 When you're done, run `./scripts/teardown.sh` to log out cleanly.
 (Skipping this step is fine but will make the next login a

@@ -43,27 +43,40 @@ What happens, step by step:
 ### 1. Login page opens in Chrome
 
 The gateway starts on `https://localhost:5000`. The script waits
-for it to listen, then opens the login page in Chrome.
+for it to listen, then opens the login page in Chrome. Type your
+IBKR username and password and submit. The Live/Paper toggle
+stays on **Live** unless you've explicitly opted into a
+paper-trading account.
 
-![IBKR Client Portal login page](../../assets/screenshots/gateway-login.png)
+### 2. Desktop waits for the push
 
-Type your IBKR username and password and submit.
+After submitting, the page transitions to a prompt telling you to
+look at your phone. If the push doesn't arrive, **Resend
+notification** is the right next step.
 
-### 2. Approve the push on your phone
+### 3. Approve the push on your phone
 
-IBKR Mobile shows a push notification. Tap **Approve**.
+IBKR Mobile (the **IB Key** app) raises a standard two-factor
+confirmation dialog. Approve it the usual way — Face ID, Touch
+ID, or whatever your phone unlock is.
 
-![IBKR Mobile push prompt](../../assets/screenshots/gateway-2fa-prompt.png)
+### 4. The gateway is authenticated
 
-### 3. The gateway is authenticated
+The desktop transitions to the IBKR Client Portal landing page.
+Meanwhile `spinup.sh` polls `/iserver/auth/status` until it
+returns `authenticated: true` and prints a terminal confirmation
+with the connected account ID. The API is now reachable at
+`https://localhost:5000/v1/api/...`.
 
-`spinup.sh` polls `/iserver/auth/status` until it returns
-`authenticated: true`, then prints a confirmation with the
-connected account ID.
+### Visual flow
 
-![Authenticated status check](../../assets/screenshots/gateway-authenticated.png)
+Steps 1 and 2 (left to right) — both desktop. Step 3 is whatever
+your phone's 2FA dialog usually looks like:
 
-The API is now reachable at `https://localhost:5000/v1/api/...`.
+<p>
+  <img src="../../assets/screenshots/gateway-login.png" alt="Step 1: IBKR login page" width="280">
+  <img src="../../assets/screenshots/gateway-2fa-waiting.png" alt="Step 2: Look at your phone" width="280">
+</p>
 
 ## Shutting down
 

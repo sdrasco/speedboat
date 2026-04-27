@@ -6,3 +6,4 @@ __pycache__/
 .venv/
 data/
 third_party/clientportal.gw/
+.claude/settings.local.json
