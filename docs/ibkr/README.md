@@ -47,7 +47,7 @@ which constrains any future unattended automation.
 |------|---------|
 | [spinup.md](spinup.md) | Walkthrough of the operational scripts — how to bring the gateway up, what each step looks like, with screenshots. |
 | [what-works.md](what-works.md) | Capabilities the IBKR Web API offers cleanly on the free retail tier. |
-| [what-doesnt.md](what-doesnt.md) | Limits, gotchas, and where you'd want different data (e.g. Massive). |
+| [what-doesnt.md](what-doesnt.md) | Limits, gotchas, and where you'd want different data (e.g. Databento). |
 | [conventions.md](conventions.md) | Non-obvious rules and gotchas — endpoint quirks, options vs stocks P&L, RTH handling, futures front-month resolution, sector taxonomy. The deepest reference in this directory. |
 | [activity-statements.md](activity-statements.md) | Why the CP Web API is inadequate for historical trade data on retail accounts and how to pull the authoritative Activity Statement CSV from the IBKR web portal instead. |
 | [cert-regen.md](cert-regen.md) | Manual recipe to regenerate the gateway's TLS cert (default ships with CN mismatch and expired in 2019) and trust it on macOS. The same procedure is automated in `scripts/download_gateway.sh`. |

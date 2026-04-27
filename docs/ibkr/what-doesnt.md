@@ -33,13 +33,16 @@ limits that are easy to hit when looping across symbols. There's a
 soft scanner endpoint for built-in scans (top movers, etc.), but
 you can't bring your own multi-factor query against the universe.
 
-**When you'd reach for Massive (or similar) instead:** any project
-where the question is "give me data on N companies" rather than
-"give me data on the N companies in my account." Massive ships an
-official MCP server (`mcp_massive`) so the agent can query it
-directly without you writing client code. Other dev-friendly
-options exist (Polygon, Alpha Vantage) but Massive is the one
-that's been called out as the natural complement to IBKR.
+**When you'd reach for Databento (or similar) instead:** any
+project where the question is *"give me data on N companies"*
+rather than *"give me data on the N companies in my account."*
+Databento offers multi-asset coverage (US equities, CME futures,
+OPRA options) under a single subscription rather than the
+per-asset-class pricing common at retail vendors. Live access is
+a flat fee; historical access is pay-as-you-go, which makes
+one-shot universe queries cheap. Other dev-friendly options
+exist (Polygon, Alpha Vantage) but Databento is the strongest
+fit when you want both live and historical under one roof.
 
 ## Full options chains across many strikes
 
@@ -48,8 +51,8 @@ hundreds of strikes per expiry. Doable for a single underlying at
 a time; not viable as "give me the full chain for every position
 in the portfolio" without rate-limiting carefully.
 
-If chain analytics matter, again Massive or a dedicated options-
-data provider is the right tool.
+If chain analytics matter, again Databento or a dedicated
+options-data provider is the right tool.
 
 ## Order placement
 

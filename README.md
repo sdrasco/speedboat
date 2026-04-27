@@ -55,7 +55,7 @@ Full list at [docs/ibkr/what-works.md](docs/ibkr/what-works.md).
   CSV download) is documented, but is genuinely a manual step.
 - **Universe scans, fundamentals across thousands of names, full
   options chains.** Doable but pacing-limited; better via a
-  third-party data provider like Massive.
+  developer-first data provider like Databento.
 - **Anything requiring orders.** This repo is read-only by design.
   Order placement belongs in a separate, isolated repo if it ever
   happens.
@@ -157,7 +157,7 @@ worth trying:
   later. Same pattern, applied to a smaller surface.
 - **Multi-source orchestrator.** Build the meta-layer that knows
   when to use IBKR (cheap, complete for "self" data) vs. when to
-  reach for a third-party feed like Massive (better for "world"
+  reach for a third-party feed like Databento (better for "world"
   data — universe scans, fundamentals across thousands of names,
   full options chains). Persistent memory of which questions
   resolved cleanly via which source. This is the orchestrator

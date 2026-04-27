@@ -91,17 +91,18 @@ Giving agents like Claude Code or Codex awareness of and skills for the IBKR API
 - **Pacing violations.** IBKR enforces historical-data request limits. Agents writing loops will blow through them. A rate limiter in the skill is worth its weight.
 - **Time zone and contract-month landmines.** Always pass `formatDate=2` for epoch seconds; resolve continuous futures via the front-month lookup helper.
 
-## Complementing IBKR with a third-party data provider like Massive
+## Complementing IBKR with a third-party data provider like Databento
 
-For deep-data projects that exceed IBKR's pacing limits, a low-cost provider like Massive complements IBKR well. Massive is positioned as a developer-first US equities and options provider with strong software development kit (SDK) support and low-latency WebSocket delivery, and ships an official Model Context Protocol (MCP) server (`mcp_massive`) that registers with Claude Code via `claude mcp add massive`. This exposes their endpoints to the agent without writing API client code.
+For deep-data projects that exceed IBKR's pacing limits, a developer-first provider like Databento complements IBKR well. Databento offers multi-asset live and historical data — US equities, CME futures, OPRA options — under a single subscription rather than the per-asset-class pricing common at most retail vendors. Live access is a flat $199 a month (live pay-as-you-go was deprecated in March 2025), and historical access stays pay-as-you-go, which makes one-shot universe queries cheap. Strong on the CME futures complex (CBOT, NYMEX, COMEX) by reputation.
 
 ### The natural architecture split
 
 - **IBKR for "self" data.** Positions, executions, cash balances, FX conversions, tax lots, transfer history, order placement. Free with the account.
-- **Third-party provider for "world" data.** Universe scans, fundamentals across thousands of names, news with sentiment, full options chains. IBKR can technically serve this but pacing limits and per-exchange data subscriptions make it the wrong tool.
+- **Third-party provider for "world" data.** Universe scans, fundamentals across thousands of names, news with sentiment, full options chains. IBKR can technically serve some of this but pacing limits and per-exchange data subscriptions make it the wrong tool.
 
 ### Things to watch
 
+- **You probably don't need this yet.** The IBKR-only path covers the immediate use case (positions, balances, FX, allocation, today's P/L) without a dollar of data subscriptions. Databento is for when "world" data becomes structurally necessary, not as a default starting point.
 - **Professional vs non-professional classification** matters separately for each data vendor. Personal use stays in the cheap lane on both sides.
 - **Redistribution licensing.** If a side project becomes something shown to other people (a public dashboard, a Substack with live charts), licensing terms shift sharply on most retail data plans. Personal tools are unaffected.
 
